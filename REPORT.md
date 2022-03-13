@@ -323,7 +323,7 @@ Get-ADPrincipalGroupMembership username | select name
 Get-ADGroupMember "group" -recursive | Select-Object name
 ```
 
-![](https://i.imgur.com/a1aG5dj.png)
+![](images/a1aG5dj.png)
 
 ### Сегмент OFFICE
 
@@ -337,7 +337,7 @@ psw_psw2="2245023265ae4cf87d02c8b6ba991139"
 psw_psw3="21232f297a57a5a743894a0e4a801fc3"
 ```
 Проверим их на CrackStation:
-![](https://i.imgur.com/APakN72.png)
+![](images/APakN72.png)
 
 ### Получение доступа к межсетевому экрану
 
@@ -407,10 +407,10 @@ net user USERAME Cha1nedRules1! /domain
 ### Действия в DMZ
 
 Проникновение началось с получения версии Drupal. 
-![](https://i.imgur.com/6S2ZHD5.png)
+![](images/6S2ZHD5.png)
 
 После было проведено сканирование.
-![](https://i.imgur.com/ZXo5dCq.png)
+![](images/ZXo5dCq.png)
 
 Дальнейшие действия по проникновению аналогичны нашим (drupalgeddon), см. выше.
 
@@ -453,9 +453,9 @@ exit 0
 
 На сервере `10.39.239.6` был обнаружен файл `C:\Ransom.ps1` (часть содержимого приведена скриншотами ниже). Это скрипт-шифровальщик.
 
-![](https://i.imgur.com/tzXUy9n.png)
+![](images/tzXUy9n.png)
 
-![](https://i.imgur.com/Qcs8piO.png)
+![](images/Qcs8piO.png)
 
 Алгоритм работы:
 1) Генерируется ключ AES;
@@ -466,31 +466,31 @@ exit 0
 
 Результат работы:
 
-![](https://i.imgur.com/AM2ueHw.png)
-![](https://i.imgur.com/9GoDYKg.png)
+![](images/AM2ueHw.png)
+![](images/9GoDYKg.png)
 
 
 Нужно установить, с каким сервером взаимодействовал скрипт. В системных журналах находим команду скачивания и запуска скрипта, а также параметры шифрования.
 
-![](https://i.imgur.com/9ioWBke.png)
+![](images/9ioWBke.png)
 
-![](https://i.imgur.com/zmdwB5O.png)
+![](images/zmdwB5O.png)
 
 Запрос на атакующий сервер попал и в PCAP межсетевого экрана:
 
-![](https://i.imgur.com/vR4Cv1t.png)
+![](images/vR4Cv1t.png)
 
 
 ### Бот-зловред в подсети АСУ ТП
 
 На сервере `10.39.3.10` обнаружен `C:\WinServ.exe`. По дате создания и расположению понимаем, что это посторонний файл, замаскированный под компонент Windows. В системных журналах находим происхождение файла:
-![](https://i.imgur.com/Rh33ZOv.png)
-![](https://i.imgur.com/tsyakJN.png)
+![](images/Rh33ZOv.png)
+![](images/tsyakJN.png)
 
 Также становится понятно, что вирус самостоятельно распространяется -- он пришел не с сервера злоумышленника, а с соседнего по SERVERS компьютера.
 
 Находим еще одно подтверждение, что атакующий -- это `10.39.200.50`.
-![](https://i.imgur.com/Ciy8Pgv.png)
+![](images/Ciy8Pgv.png)
 
 Вирус написан на Python 3, затем упакован в `.exe` с помощью PyInstaller.
 После дизассемблирования байт-кода Python  восстанавливаем алгоритм работы.
